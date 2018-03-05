@@ -11,16 +11,23 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import com.example.a5five_vkapp.retrofit.RetrofitClient;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class WebViewActivity extends Activity {
 
-    WebView webView;
+    @BindView(R.id.webview) WebView webView;
+
+    private static final String LOG_TAG = "myLog";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.webview);
 
-        webView = (WebView) findViewById(R.id.web);
+        ButterKnife.bind(this);
 
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setVerticalScrollBarEnabled(false);
@@ -39,13 +46,13 @@ public class WebViewActivity extends Activity {
                     final String accessToken = Uri.parse(url).getQueryParameter("access_token");
                     final long userId = Long.valueOf(Uri.parse(url).getQueryParameter("user_id"));
 
-                    if (null != accessToken) {
-                        RetrofitClient.getInstanse().setAccessToken(accessToken);
-                        RetrofitClient.getInstanse().setUserId(userId);
+                    if (accessToken != null) {
+                        RetrofitClient.getInstance().setAccessToken(accessToken);
+                        RetrofitClient.getInstance().setUserId(userId);
                     }
 
-                    Log.d("AAAAAAAAAAAAAAAAAAAAA:", accessToken);
-                    Log.d("BBBBBBbb:", String.valueOf(userId));
+                    Log.d(LOG_TAG, "Access token: " + accessToken);
+                    Log.d(LOG_TAG, "User ID: " + String.valueOf(userId));
 
                     Intent intent = new Intent(getApplicationContext(), LoggedInActivity.class);
                     startActivity(intent);
@@ -53,7 +60,6 @@ public class WebViewActivity extends Activity {
             }
         });
     }
-
 
 
     class VkWebViewClient extends WebViewClient {
@@ -78,8 +84,8 @@ public class WebViewActivity extends Activity {
                 final long userId = Long.valueOf(Uri.parse(url).getQueryParameter("user_id"));
 
                 if (null != accessToken) {
-                    RetrofitClient.getInstanse().setAccessToken(accessToken);
-                    RetrofitClient.getInstanse().setUserId(userId);
+                    RetrofitClient.getInstance().setAccessToken(accessToken);
+                    RetrofitClient.getInstance().setUserId(userId);
                 }
 
             } else if (url.contains("error")) {

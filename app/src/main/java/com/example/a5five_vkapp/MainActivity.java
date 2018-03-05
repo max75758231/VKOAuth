@@ -3,28 +3,26 @@ package com.example.a5five_vkapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView textView;
-    Button button;
+    @BindView(R.id.btn_log_in) Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textView = (TextView) findViewById(R.id.textViewName);
-        button = (Button) findViewById(R.id.button);
+        ButterKnife.bind(this);
+    }
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, WebViewActivity.class));
-            }
-        });
+    @OnClick(R.id.btn_log_in)
+    void onLogInClick() {
+        startActivity(new Intent(MainActivity.this, WebViewActivity.class));
     }
 }

@@ -3,8 +3,6 @@ package com.example.a5five_vkapp.data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 public class PhotoDataModel {
 
     @SerializedName("id")

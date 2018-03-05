@@ -1,19 +1,10 @@
-package com.example.a5five_vkapp;
+package com.example.a5five_vkapp.retrofit;
 
-
-import android.util.Log;
-
-import com.example.a5five_vkapp.data.ResponseData;
-import com.example.a5five_vkapp.data.UserData;
-import com.example.a5five_vkapp.retrofit.VkService;
-
-import java.io.IOException;
-import java.util.List;
+import com.example.a5five_vkapp.BuildConfig;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Call;
-import retrofit2.Response;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -43,13 +34,13 @@ public class RetrofitClient {
     }
 
 
-    private static RetrofitClient instanse;
+    private static RetrofitClient instance;
 
-    public static RetrofitClient getInstanse() {
-        if (instanse == null) {
-            instanse = new RetrofitClient();
+    public static RetrofitClient getInstance() {
+        if (instance == null) {
+            instance = new RetrofitClient();
         }
-        return instanse;
+        return instance;
     }
 
     private RetrofitClient() {
