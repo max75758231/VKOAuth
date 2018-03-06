@@ -61,7 +61,6 @@ public class WebViewActivity extends Activity {
         });
     }
 
-
     class VkWebViewClient extends WebViewClient {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap icon) {
@@ -83,7 +82,7 @@ public class WebViewActivity extends Activity {
                 final String accessToken = Uri.parse(url).getQueryParameter("access_token");
                 final long userId = Long.valueOf(Uri.parse(url).getQueryParameter("user_id"));
 
-                if (null != accessToken) {
+                if (accessToken != null) {
                     RetrofitClient.getInstance().setAccessToken(accessToken);
                     RetrofitClient.getInstance().setUserId(userId);
                 }

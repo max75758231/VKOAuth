@@ -10,17 +10,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
 
-    public final static String CLIENT_ID = "5814796";
-    public final static String REDIRECT_URI = "https://oauth.vk.com/blank.html";
-    public final static String FIELDS = "photo_max";
+    public static final String CLIENT_ID = "5814796";
+    public static final String REDIRECT_URI = "https://oauth.vk.com/blank.html";
+    public static final String FIELD = "photo_max";
 
-    public final static String AUTH_URL = "https://oauth.vk.com/authorize?client_id=" + CLIENT_ID +
+    public static final String AUTH_URL = "https://oauth.vk.com/authorize?client_id=" + CLIENT_ID +
             "&redirect_uri=" + REDIRECT_URI + "&display=mobile&scope=photos&response_type=token";
 
     private final OkHttpClient okHttpClient;
     private final Retrofit retrofit;
     private final VkService vkService;
 
+    private static final String API_SERVICE_ADDRESS = "https://api.vk.com/";
 
     private String accessToken;
     private long userId;
@@ -32,7 +33,6 @@ public class RetrofitClient {
     public void setUserId(long userId) {
         this.userId = userId;
     }
-
 
     private static RetrofitClient instance;
 
@@ -61,7 +61,7 @@ public class RetrofitClient {
 
     private Retrofit buildRetrofit() {
         return new Retrofit.Builder()
-                .baseUrl("https://api.vk.com/")
+                .baseUrl(API_SERVICE_ADDRESS)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build();
